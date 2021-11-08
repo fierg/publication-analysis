@@ -12,7 +12,12 @@ repositories {
 }
 
 dependencies {
+// https://mvnrepository.com/artifact/org.jetbrains.lets-plot/lets-plot-kotlin-jvm
+    implementation group: 'org.jetbrains.lets-plot', name: 'lets-plot-kotlin-jvm', version: '3.1.0'
+
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }

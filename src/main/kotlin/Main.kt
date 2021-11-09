@@ -1,3 +1,4 @@
+@file:JvmName("Main")
 
 import jetbrains.datalore.plot.PlotSvgExport
 import jetbrains.letsPlot.geom.geomPoint

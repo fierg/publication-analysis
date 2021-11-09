@@ -25,4 +25,6 @@ hs_err_pid*
 # gradle stuff
 .gradle/
 .idea/
-gradle/
+build/
+lets-plot-images/
+

@@ -14,14 +14,6 @@ fun createPlot(result: Map<Int, Double>): Plot {
         "year" to result.toSortedMap().keys.toList()
     )
 
-    val rand = java.util.Random(123)
-    val n = 400
-    val data = mapOf (
-        "rating" to List(n/2) { rand.nextGaussian() } + List(n/2) { rand.nextGaussian() * 1.5 + 1.5 },
-        "cond" to List(n/2) { "A" } + List(n/2) { "B" }
-    )
-
-
     return letsPlot(data2) + geomPoint(data2)  {x = "year"; y = "value"}
 }
 
@@ -44,16 +36,17 @@ fun main() {
     val regexMatch = Regex("^\\w+\t(\\d+)\t(?:.* )?(\\w{2,}ing).*\$")
     val regexYear = Regex("^\\w+\t(\\d+)\t.*\$")
     File("data/titles.txt").forEachLine { line ->
+        val lineLowercase = line.lowercase()
         when {
-            regexMatch.matches(line) -> {
-                val match = regexMatch.find(line)!!.groupValues
+            regexMatch.matches(lineLowercase) -> {
+                val match = regexMatch.find(lineLowercase)!!.groupValues
                 countMatch[match[1].toInt()] = (countMatch[match[1].toInt()] ?: 0) + 1
                 countTitle[match[1].toInt()] = (countTitle[match[1].toInt()] ?: 0) + 1
                 countWords[match[2]] = (countWords[match[2]] ?: 0) + 1
 
             }
             else -> {
-                val match = regexYear.find(line)!!.groupValues
+                val match = regexYear.find(lineLowercase)!!.groupValues
                 countTitle[match[1].toInt()] = (countTitle[match[1].toInt()] ?: 0) + 1
             }
         }
@@ -77,4 +70,14 @@ fun main() {
         println("Word: ${commonWords[i].first} occured ${commonWords[i].second} times")
     }
 }
+
+
+
+
+
+
+
+
+
+
 

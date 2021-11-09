@@ -1,6 +1,6 @@
 
 import jetbrains.datalore.plot.PlotSvgExport
-import jetbrains.letsPlot.geom.geomDensity
+import jetbrains.letsPlot.geom.geomPoint
 import jetbrains.letsPlot.intern.Plot
 import jetbrains.letsPlot.intern.toSpec
 import jetbrains.letsPlot.letsPlot
@@ -10,15 +10,19 @@ import java.io.File
 
 fun createPlot(result: Map<Int, Double>): Plot {
     val data2 =mapOf<String, Any>(
-        "year" to result.toSortedMap().values.toList()
+        "value" to result.toSortedMap().values.toList(),
+        "year" to result.toSortedMap().keys.toList()
     )
 
-    return letsPlot(data2) + geomDensity(
-        color = "dark-green",
-        fill = "green",
-        alpha = .3,
-        size = 2.0
-    ) { x = "year" }
+    val rand = java.util.Random(123)
+    val n = 400
+    val data = mapOf (
+        "rating" to List(n/2) { rand.nextGaussian() } + List(n/2) { rand.nextGaussian() * 1.5 + 1.5 },
+        "cond" to List(n/2) { "A" } + List(n/2) { "B" }
+    )
+
+
+    return letsPlot(data2) + geomPoint(data2)  {x = "year"; y = "value"}
 }
 
 fun openInBrowser(content: String) {
